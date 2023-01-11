@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style object to less/scss format string</title>
+</head>
+
+<body>
+  <style>
+    .container {
+      width: 88vw;
+      margin: 0 auto;
+    }
+
+    .mainWrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80vh;
+      width: 100%;
+    }
+
+    .block {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .block textarea {
+      flex: 1;
+    }
+
+    .block .title{
+      display: flex;
+      justify-content: space-between;
+    }
+    .block .title label {
+      cursor: pointer;
+    }
+
+    .btnBox {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .transBtn {
+      line-height: 50px;
+      font-size: 36px;
+      margin: 5px;
+      font-family: 宋体;
+    }
+
+    .errorLeft,
+    .errorRight {
+      color: red;
+      height: 1em;
+    }
+
+    .inputBox {
+      position: relative;
+      flex: 1;
+      display: flex;
+    }
+
+    .clear {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      width: 16px;
+      height: 16px;
+      background-color: rgba(0, 0, 0, .25);
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 15px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    textarea:placeholder-shown+.clear {
+      display: none;
+    }
+
+    #copyright {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      color: #ccc;
+      text-align: center;
+      font-size: 12px;
+    }
+  </style>
+  <div class="container">
+    <div class="mainWrap">
+      <div class="block">
+        <p class="title">
+          <span>Style Object</span>
+          <span>
+            <label><input name="case" type="radio" checked value="1">camelCase</label>
+            <label><input name="case" type="radio" value="2">kebab-case</label>
+          </span>
+        </p>
+        <div class="inputBox">
+          <textarea cols="50" class="input" placeholder="Input/Output Style Object"></textarea>
+          <div class="clear">x</div>
+        </div>
+        <div class="errorLeft"></div>
+      </div>
+      <div class="btnBox">
+        <button class="transBtn object2CssText">&gt;</button>
+        <button class="transBtn cssText2Object">&lt;</button>
+      </div>
+      <div class="block">
+        <p class="title">CSS</p>
+        <div class="inputBox">
+          <textarea cols="50" class="output" placeholder="Input/Output CSS"></textarea>
+          <div class="clear">x</div>
+        </div>
+        <div class="errorRight"></div>
+      </div>
+    </div>
+  </div>
+  <div id="copyright">
+    <a style="color: #ccc;" target="_blank" href="https://github.com/LuckLin520">© https://github.com/LuckLin520</a>
+    502763576@qq.com
+  </div>
+  <script src="./CssObjectTransfer.js"></script>
+  <script src="./application.js"></script>
+  <script src="./test.js"></script>
+  <script>
+    application()
+    // testObject2CssText()
+    // testCssText2Object()
+  </script>
+</body>
+
+</html>
