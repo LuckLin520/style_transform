@@ -82,7 +82,7 @@ class CssObjectTransfer {
     for (let key in obj) {
       if (Object.hasOwnProperty.call(obj, key)) {
         const value = obj[key];
-        key = camel ? kebab2Camel(key) : camel2Kebab(key);
+        key = camel && /^[A-Za-z]/.test(key) ? kebab2Camel(key) : camel2Kebab(key);
         if (isObject(value)) {
           resultObj[key] = CssObjectTransfer.formatObjectKeyValue(value, camel);
           continue;

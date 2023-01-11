@@ -8,7 +8,7 @@ function testObject2CssText() {
     "&:hover": {
       background: "red",
       textAlign: "center",
-      ".children": {
+      ".test-children": {
         color: "orange",
         paddingLeft: 20,
       },
@@ -26,7 +26,7 @@ function testCssText2Object() {
     &:hover{
       background:red;
       text-align: center;
-      .children{
+      .test-children{
         color:orange;
         padding-left: 20px;
       }

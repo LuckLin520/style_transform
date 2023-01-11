@@ -43,7 +43,6 @@ function application() {
       eval(`var cssObj = ${leftInput.value}`);
       if (!isObject(cssObj))
         return setError("The input is not a css object", true);
-      console.log(cssObj);
       leftInput.value = JSON.stringify(
         CssObjectTransfer.formatObjectKeyValue(cssObj, v.value === "1")
       );
