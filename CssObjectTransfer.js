@@ -31,17 +31,7 @@ class CssObjectTransfer {
     const pxPropsKeyword = ["padding", "margin", "radius"];
     return pxPropsKeyword.some((v) => camel2Kebab(key).includes(v));
   }
-  static objectFormatCssText = (obj, level) => {
-    const cssObjStr = JSON.stringify(obj);
-    if (level > 1) return cssObjStr.replace(/(")/g, "");
-    return cssObjStr
-      .replace(/(")|(\}$)|(^\{)/g, "")
-      .replaceAll(":{", "{\n\t")
-      .replaceAll(",", ";\n")
-      .replaceAll("}", ";\n}")
-      .replace("};", "}");
-  };
-  static object2CssText(obj, level = 1) {
+  static objectFormatCssText(obj) {
     const resultObj = {};
     for (let key in obj) {
       if (Object.hasOwnProperty.call(obj, key)) {
@@ -55,11 +45,21 @@ class CssObjectTransfer {
           continue;
         }
         resultObj[camel2Kebab(key)] = isObject(value)
-          ? CssObjectTransfer.object2CssText(value, level + 1)
+          ? CssObjectTransfer.objectFormatCssText(value)
           : value;
       }
     }
-    return CssObjectTransfer.objectFormatCssText(resultObj, level);
+    return resultObj
+  }
+  static object2CssText(obj) {
+    let resultStr = JSON.stringify(CssObjectTransfer.objectFormatCssText(obj), null, 4)
+      .replace(/(")|(\}$)|(^\{)/g, "")
+      .replaceAll(": {", " {")
+      .replaceAll(",", "").replace('\n','')
+      .replaceAll("\n", ";\n")
+      .replaceAll("{;", "{")
+      .replaceAll("};", "}")
+      return resultStr
   }
   static cssText2Object(text, camel = false) {
     let result =
@@ -75,14 +75,15 @@ class CssObjectTransfer {
       JSON.parse(result),
       camel
     );
-    return JSON.stringify(resultObj);
+    return JSON.stringify(resultObj, null, 4);
   }
   static formatObjectKeyValue(obj, camel) {
     const resultObj = {};
     for (let key in obj) {
       if (Object.hasOwnProperty.call(obj, key)) {
         const value = obj[key];
-        key = camel && /^[A-Za-z]/.test(key) ? kebab2Camel(key) : camel2Kebab(key);
+        key =
+          camel && /^[A-Za-z]/.test(key) ? kebab2Camel(key) : camel2Kebab(key);
         if (isObject(value)) {
           resultObj[key] = CssObjectTransfer.formatObjectKeyValue(value, camel);
           continue;

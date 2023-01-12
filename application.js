@@ -44,7 +44,9 @@ function application() {
       if (!isObject(cssObj))
         return setError("The input is not a css object", true);
       leftInput.value = JSON.stringify(
-        CssObjectTransfer.formatObjectKeyValue(cssObj, v.value === "1")
+        CssObjectTransfer.formatObjectKeyValue(cssObj, v.value === "1"),
+        null,
+        4
       );
     })
   );
